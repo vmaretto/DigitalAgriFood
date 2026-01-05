@@ -587,125 +587,126 @@ export default function MasterDashboard() {
 
       {/* HEADER */}
       <header className="bg-gradient-to-br from-teal-800 via-teal-700 to-teal-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="bg-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
+            <span className="bg-orange-500 text-white text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full uppercase tracking-wide">
               {masterData.level}
             </span>
-            <span className="bg-white/20 text-white/90 text-xs px-3 py-1 rounded-full">
+            <span className="bg-white/20 text-white/90 text-xs px-2 sm:px-3 py-1 rounded-full">
               Proposta Partnership 2026
             </span>
           </div>
 
-          <h1 className="text-3xl font-bold mb-2">{masterData.title}</h1>
-          <p className="text-teal-100 text-lg max-w-2xl">{masterData.subtitle}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">{masterData.title}</h1>
+          <p className="text-teal-100 text-base sm:text-lg max-w-2xl">{masterData.subtitle}</p>
 
           {/* KPI Header */}
-          <div className="flex gap-10 mt-8 pt-6 border-t border-white/20">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 sm:gap-10 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/20">
             <div>
-              <div className="text-4xl font-bold">{masterData.totalCFU}</div>
-              <div className="text-teal-200 text-sm">CFU Totali</div>
+              <div className="text-2xl sm:text-4xl font-bold">{masterData.totalCFU}</div>
+              <div className="text-teal-200 text-xs sm:text-sm">CFU Totali</div>
             </div>
             <div>
-              <div className="text-4xl font-bold">{masterData.modules.length}</div>
-              <div className="text-teal-200 text-sm">Moduli</div>
+              <div className="text-2xl sm:text-4xl font-bold">{masterData.modules.length}</div>
+              <div className="text-teal-200 text-xs sm:text-sm">Moduli</div>
             </div>
             <div>
-              <div className="text-4xl font-bold">{categories.length}</div>
-              <div className="text-teal-200 text-sm">Categorie</div>
+              <div className="text-2xl sm:text-4xl font-bold">{categories.length}</div>
+              <div className="text-teal-200 text-xs sm:text-sm">Categorie</div>
             </div>
             <div>
-              <div className="text-4xl font-bold">12</div>
-              <div className="text-teal-200 text-sm">Mesi</div>
+              <div className="text-2xl sm:text-4xl font-bold">12</div>
+              <div className="text-teal-200 text-xs sm:text-sm">Mesi</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-orange-400">100%</div>
-              <div className="text-teal-200 text-sm">Focus Digitale</div>
+              <div className="text-2xl sm:text-4xl font-bold text-orange-400">100%</div>
+              <div className="text-teal-200 text-xs sm:text-sm">Focus Digitale</div>
             </div>
           </div>
         </div>
       </header>
 
       {/* NAVIGATION */}
-      <nav className="bg-white border-b shadow-sm sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-6">
+      <nav className="bg-white border-b shadow-sm sticky top-0 z-20 overflow-x-auto">
+        <div className="max-w-6xl mx-auto px-2 sm:px-6">
           <div className="flex">
             {[
-              { id: 'overview', label: '📌 Overview', desc: 'Vista alto livello' },
-              { id: 'modules', label: '📚 Moduli', desc: 'Per categoria' },
-              { id: 'detail', label: '🔍 Dettaglio', desc: 'Singolo modulo' },
-              { id: 'benchmark', label: '🎓 Benchmark', desc: 'Master di riferimento' }
+              { id: 'overview', label: '📌', labelFull: '📌 Overview', desc: 'Vista alto livello' },
+              { id: 'modules', label: '📚', labelFull: '📚 Moduli', desc: 'Per categoria' },
+              { id: 'detail', label: '🔍', labelFull: '🔍 Dettaglio', desc: 'Singolo modulo' },
+              { id: 'benchmark', label: '🎓', labelFull: '🎓 Benchmark', desc: 'Master di riferimento' }
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id); if(tab.id !== 'detail') setSelectedModule(null); }}
-                className={`px-5 py-4 text-sm font-medium border-b-2 transition-all ${
+                className={`px-3 sm:px-5 py-3 sm:py-4 text-sm font-medium border-b-2 transition-all flex-1 sm:flex-none ${
                   activeTab === tab.id
                     ? 'border-teal-600 text-teal-700 bg-teal-50'
                     : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <div>{tab.label}</div>
-                <div className="text-xs font-normal text-slate-400">{tab.desc}</div>
+                <div className="sm:hidden text-lg">{tab.label}</div>
+                <div className="hidden sm:block">{tab.labelFull}</div>
+                <div className="text-xs font-normal text-slate-400 hidden sm:block">{tab.desc}</div>
               </button>
             ))}
           </div>
         </div>
       </nav>
 
-      <main className="max-w-6xl mx-auto px-6 py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
         {/* ==================== TAB: OVERVIEW ==================== */}
         {activeTab === 'overview' && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
 
             {/* Value Proposition */}
-            <section className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-2xl p-8 text-white">
-              <h2 className="text-2xl font-bold mb-4">🎯 Perché questo Master?</h2>
-              <p className="text-lg text-teal-50 leading-relaxed mb-6">
+            <section className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-2xl p-5 sm:p-8 text-white">
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">🎯 Perché questo Master?</h2>
+              <p className="text-base sm:text-lg text-teal-50 leading-relaxed mb-4 sm:mb-6">
                 Un percorso formativo <strong>100% focalizzato sulle tecnologie digitali</strong> per l'agroalimentare.
                 Progettato per professionisti del settore agricolo e alimentare che vogliono guidare la trasformazione digitale,
                 non per diventare sviluppatori ma per <strong>comprendere, valutare e implementare</strong> soluzioni innovative.
               </p>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 <div className="bg-white/10 rounded-xl p-4">
-                  <div className="text-3xl mb-2">🎓</div>
-                  <div className="font-semibold">Benchmark Internazionale</div>
-                  <div className="text-teal-200 text-sm">10 Master EU analizzati</div>
+                  <div className="text-2xl sm:text-3xl mb-2">🎓</div>
+                  <div className="font-semibold text-sm sm:text-base">Benchmark Internazionale</div>
+                  <div className="text-teal-200 text-xs sm:text-sm">10 Master EU analizzati</div>
                 </div>
                 <div className="bg-white/10 rounded-xl p-4">
-                  <div className="text-3xl mb-2">💻</div>
-                  <div className="font-semibold">Application-First</div>
-                  <div className="text-teal-200 text-sm">Tecnologie nel contesto d'uso</div>
+                  <div className="text-2xl sm:text-3xl mb-2">💻</div>
+                  <div className="font-semibold text-sm sm:text-base">Application-First</div>
+                  <div className="text-teal-200 text-xs sm:text-sm">Tecnologie nel contesto d'uso</div>
                 </div>
                 <div className="bg-white/10 rounded-xl p-4">
-                  <div className="text-3xl mb-2">🚀</div>
-                  <div className="font-semibold">Learning by Doing</div>
-                  <div className="text-teal-200 text-sm">Hackathon, Project Work, Tirocinio</div>
+                  <div className="text-2xl sm:text-3xl mb-2">🚀</div>
+                  <div className="font-semibold text-sm sm:text-base">Learning by Doing</div>
+                  <div className="text-teal-200 text-xs sm:text-sm">Hackathon, Project Work, Tirocinio</div>
                 </div>
               </div>
             </section>
 
             {/* Distribuzione CFU per Categoria */}
-            <section className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-slate-800 mb-6">📊 Distribuzione CFU per Categoria</h2>
-              <div className="flex items-end gap-6 px-4" style={{ height: '280px' }}>
+            <section className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-4 sm:mb-6">📊 Distribuzione CFU per Categoria</h2>
+              <div className="grid grid-cols-5 gap-2 sm:gap-6 px-0 sm:px-4" style={{ minHeight: '200px' }}>
                 {categories.map(cat => (
-                  <div key={cat.id} className="flex-1 flex flex-col items-center justify-end h-full">
-                    <div className="text-xl font-bold text-slate-700 mb-2">{cat.totalCFU}</div>
+                  <div key={cat.id} className="flex flex-col items-center justify-end h-full">
+                    <div className="text-sm sm:text-xl font-bold text-slate-700 mb-1 sm:mb-2">{cat.totalCFU}</div>
                     <div
-                      className="w-full rounded-t-xl transition-all hover:opacity-80 cursor-pointer"
+                      className="w-full rounded-t-lg sm:rounded-t-xl transition-all hover:opacity-80 cursor-pointer"
                       style={{
-                        height: `${(cat.totalCFU / 24) * 120}px`,
+                        height: `${(cat.totalCFU / 24) * 80}px`,
                         backgroundColor: cat.color,
-                        minHeight: '25px'
+                        minHeight: '20px'
                       }}
                       onClick={() => setActiveTab('modules')}
                     />
-                    <div className="mt-3 text-center">
-                      <div className="text-lg">{cat.icon}</div>
-                      <div className="text-xs font-semibold mt-1" style={{ color: cat.color }}>{cat.label}</div>
-                      <div className="text-xs text-slate-400">
+                    <div className="mt-2 sm:mt-3 text-center">
+                      <div className="text-base sm:text-lg">{cat.icon}</div>
+                      <div className="text-[10px] sm:text-xs font-semibold mt-1 leading-tight" style={{ color: cat.color }}>{cat.label}</div>
+                      <div className="text-[10px] sm:text-xs text-slate-400 hidden sm:block">
                         {cat.id === 'vertical' ? '2 su 8' : `${modulesByCategory.find(c => c.id === cat.id)?.modules.length} moduli`}
                       </div>
                     </div>
@@ -716,39 +717,39 @@ export default function MasterDashboard() {
 
             {/* Struttura del Percorso */}
             <section>
-              <h2 className="text-xl font-bold text-slate-800 mb-4">📚 Struttura del Percorso</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-4">📚 Struttura del Percorso</h2>
               <div className="space-y-4">
                 {modulesByCategory.map(cat => (
                   <div
                     key={cat.id}
-                    className="bg-white rounded-xl p-5 shadow-sm border-l-4"
+                    className="bg-white rounded-xl p-4 sm:p-5 shadow-sm border-l-4"
                     style={{ borderLeftColor: cat.color }}
                   >
-                    <div className="flex items-center gap-4 mb-4">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-4">
                       <div
-                        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-xl sm:text-2xl flex-shrink-0"
                         style={{ backgroundColor: cat.bg }}
                       >
                         {cat.icon}
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-slate-800 text-lg">{cat.label}</h3>
-                        <p className="text-sm text-slate-500">{cat.description}</p>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-slate-800 text-base sm:text-lg">{cat.label}</h3>
+                        <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">{cat.description}</p>
                       </div>
-                      <div className="text-right">
-                        <span className="text-2xl font-bold" style={{ color: cat.color }}>{cat.totalCFU}</span>
-                        <span className="text-sm text-slate-400 ml-1">CFU</span>
+                      <div className="text-right flex-shrink-0">
+                        <span className="text-xl sm:text-2xl font-bold" style={{ color: cat.color }}>{cat.totalCFU}</span>
+                        <span className="text-xs sm:text-sm text-slate-400 ml-1">CFU</span>
                       </div>
                     </div>
-                    <div className={`grid gap-2 ${cat.id === 'vertical' ? 'grid-cols-4' : 'grid-cols-2'}`}>
+                    <div className={`grid gap-2 grid-cols-1 ${cat.id === 'vertical' ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-2'}`}>
                       {cat.modules.map(mod => (
                         <button
                           key={mod.id}
                           onClick={() => { setSelectedModule(mod); setActiveTab('detail'); }}
-                          className="text-left flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors group border border-slate-100"
+                          className="text-left flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-slate-50 transition-colors group border border-slate-100"
                         >
-                          <span className="text-lg">{mod.icon}</span>
-                          <span className="flex-1 text-sm text-slate-700 group-hover:text-teal-700 font-medium truncate">{mod.name}</span>
+                          <span className="text-base sm:text-lg">{mod.icon}</span>
+                          <span className="flex-1 text-xs sm:text-sm text-slate-700 group-hover:text-teal-700 font-medium truncate">{mod.name}</span>
                           <span className="text-xs font-semibold px-2 py-1 rounded" style={{ backgroundColor: cat.bg, color: cat.color }}>{mod.cfu}</span>
                         </button>
                       ))}
@@ -766,10 +767,10 @@ export default function MasterDashboard() {
 
         {/* ==================== TAB: MODULES ==================== */}
         {activeTab === 'modules' && (
-          <div className="space-y-8">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-slate-800">📚 Moduli per Categoria</h2>
-              <div className="text-sm text-slate-500">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-800">📚 Moduli per Categoria</h2>
+              <div className="text-xs sm:text-sm text-slate-500">
                 Clicca su un modulo per vedere il dettaglio completo
               </div>
             </div>
@@ -778,52 +779,52 @@ export default function MasterDashboard() {
               <section key={cat.id} className="space-y-3">
                 {/* Header Categoria */}
                 <div
-                  className="flex items-center gap-4 p-5 rounded-xl"
+                  className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl"
                   style={{ backgroundColor: cat.bg }}
                 >
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl bg-white shadow-sm">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-2xl sm:text-3xl bg-white shadow-sm flex-shrink-0">
                     {cat.icon}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold" style={{ color: cat.color }}>{cat.label}</h3>
-                    <p className="text-sm text-slate-600">{cat.description}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-xl font-bold" style={{ color: cat.color }}>{cat.label}</h3>
+                    <p className="text-xs sm:text-sm text-slate-600 hidden sm:block">{cat.description}</p>
                   </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold" style={{ color: cat.color }}>{cat.totalCFU}</div>
+                  <div className="text-right flex-shrink-0">
+                    <div className="text-2xl sm:text-3xl font-bold" style={{ color: cat.color }}>{cat.totalCFU}</div>
                     <div className="text-xs text-slate-500">CFU</div>
                   </div>
                 </div>
 
                 {/* Moduli della categoria */}
-                <div className="grid grid-cols-1 gap-3 pl-4">
+                <div className="grid grid-cols-1 gap-3 pl-0 sm:pl-4">
                   {cat.modules.map(mod => (
                     <button
                       key={mod.id}
                       onClick={() => { setSelectedModule(mod); setActiveTab('detail'); }}
-                      className="w-full text-left bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all border-l-4 group"
+                      className="w-full text-left bg-white rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-all border-l-4 group"
                       style={{ borderLeftColor: mod.color }}
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex items-start gap-3 sm:gap-4">
                         <div
-                          className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-lg sm:text-xl flex-shrink-0"
                           style={{ backgroundColor: cat.bg }}
                         >
                           {mod.icon}
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-slate-800 text-lg group-hover:text-teal-700 transition-colors">
+                          <h4 className="font-bold text-slate-800 text-base sm:text-lg group-hover:text-teal-700 transition-colors">
                             {mod.name}
                           </h4>
-                          <p className="text-sm text-slate-600 line-clamp-2 mt-1">{mod.description.substring(0, 150)}...</p>
-                          <div className="flex items-center gap-4 mt-2 text-xs text-slate-400">
+                          <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 mt-1 hidden sm:block">{mod.description.substring(0, 150)}...</p>
+                          <div className="flex items-center gap-3 sm:gap-4 mt-2 text-xs text-slate-400">
                             <span>🎯 {mod.objectives.length} obiettivi</span>
                             <span>📝 {mod.topics.length} argomenti</span>
                           </div>
                         </div>
 
                         <div className="text-right flex-shrink-0">
-                          <div className="text-2xl font-bold" style={{ color: mod.color }}>{mod.cfu}</div>
+                          <div className="text-xl sm:text-2xl font-bold" style={{ color: mod.color }}>{mod.cfu}</div>
                           <div className="text-xs text-slate-400">CFU</div>
                         </div>
                       </div>
@@ -832,7 +833,7 @@ export default function MasterDashboard() {
                 </div>
 
                 {cat.id === 'vertical' && (
-                  <p className="text-sm text-slate-500 pl-4 italic">* Lo studente sceglie 2 moduli da 4 CFU su 8 disponibili per un totale di 8 CFU</p>
+                  <p className="text-xs sm:text-sm text-slate-500 pl-0 sm:pl-4 italic">* Lo studente sceglie 2 moduli da 4 CFU su 8 disponibili per un totale di 8 CFU</p>
                 )}
               </section>
             ))}
@@ -841,9 +842,9 @@ export default function MasterDashboard() {
 
         {/* ==================== TAB: DETAIL ==================== */}
         {activeTab === 'detail' && (
-          <div className="grid grid-cols-4 gap-6">
-            {/* Sidebar lista */}
-            <div className="space-y-3 max-h-screen overflow-y-auto sticky top-24 pr-2">
+          <div className="flex flex-col lg:grid lg:grid-cols-4 gap-4 sm:gap-6">
+            {/* Sidebar lista - collapsible on mobile */}
+            <div className={`space-y-3 lg:max-h-screen lg:overflow-y-auto lg:sticky lg:top-24 pr-0 lg:pr-2 ${selectedModule ? 'hidden lg:block' : 'block'}`}>
               <h3 className="font-semibold text-slate-600 text-sm px-2">Seleziona Modulo</h3>
               {modulesByCategory.map(cat => (
                 <div key={cat.id}>
@@ -873,16 +874,23 @@ export default function MasterDashboard() {
             </div>
 
             {/* Dettaglio */}
-            <div className="col-span-3">
+            <div className="lg:col-span-3">
               {selectedModule ? (
                 <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+                  {/* Back button for mobile */}
+                  <button
+                    onClick={() => setSelectedModule(null)}
+                    className="lg:hidden w-full p-3 bg-slate-100 text-slate-600 text-sm font-medium flex items-center gap-2"
+                  >
+                    ← Torna alla lista moduli
+                  </button>
                   {/* Header */}
                   <div
-                    className="p-6 text-white"
+                    className="p-4 sm:p-6 text-white"
                     style={{ background: `linear-gradient(135deg, ${selectedModule.color} 0%, ${selectedModule.color}cc 100%)` }}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center text-3xl">
+                    <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-xl flex items-center justify-center text-2xl sm:text-3xl flex-shrink-0">
                         {selectedModule.icon}
                       </div>
                       <div className="flex-1">
@@ -891,36 +899,36 @@ export default function MasterDashboard() {
                             {categories.find(c => c.id === selectedModule.category)?.label}
                           </span>
                         </div>
-                        <h2 className="text-2xl font-bold">{selectedModule.fullName}</h2>
+                        <h2 className="text-lg sm:text-2xl font-bold">{selectedModule.fullName}</h2>
                       </div>
-                      <div className="text-right">
-                        <div className="text-4xl font-bold">{selectedModule.cfu}</div>
-                        <div className="text-white/70">CFU</div>
+                      <div className="text-left sm:text-right flex-shrink-0 flex sm:block items-center gap-2">
+                        <div className="text-2xl sm:text-4xl font-bold">{selectedModule.cfu}</div>
+                        <div className="text-white/70 text-sm">CFU</div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-6 space-y-6">
+                  <div className="p-4 sm:p-6 space-y-5 sm:space-y-6">
                     {/* Descrizione */}
                     <div>
-                      <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                      <h3 className="font-bold text-slate-800 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
                         <span className="w-2 h-2 rounded-full" style={{ backgroundColor: selectedModule.color }}></span>
                         Descrizione
                       </h3>
-                      <p className="text-slate-600 leading-relaxed">{selectedModule.description}</p>
+                      <p className="text-slate-600 leading-relaxed text-sm sm:text-base">{selectedModule.description}</p>
                     </div>
 
                     {/* Obiettivi Formativi */}
                     <div>
-                      <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                      <h3 className="font-bold text-slate-800 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
                         <span className="w-2 h-2 rounded-full" style={{ backgroundColor: selectedModule.color }}></span>
                         Obiettivi Formativi
                       </h3>
                       <div className="space-y-2">
                         {selectedModule.objectives.map((obj, i) => (
-                          <div key={i} className="flex items-start gap-3 text-sm text-slate-600 bg-slate-50 rounded-lg p-3">
+                          <div key={i} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 bg-slate-50 rounded-lg p-2 sm:p-3">
                             <span
-                              className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                              className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
                               style={{ backgroundColor: selectedModule.color }}
                             >
                               {i + 1}
@@ -933,13 +941,13 @@ export default function MasterDashboard() {
 
                     {/* Argomenti Principali */}
                     <div>
-                      <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                      <h3 className="font-bold text-slate-800 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
                         <span className="w-2 h-2 rounded-full" style={{ backgroundColor: selectedModule.color }}></span>
                         Argomenti Principali
                       </h3>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {selectedModule.topics.map((topic, i) => (
-                          <div key={i} className="flex items-start gap-2 text-sm text-slate-600 bg-slate-50 rounded-lg p-3">
+                          <div key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 bg-slate-50 rounded-lg p-2 sm:p-3">
                             <span style={{ color: selectedModule.color }}>•</span>
                             <span>{topic}</span>
                           </div>
@@ -949,10 +957,10 @@ export default function MasterDashboard() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-slate-100 rounded-2xl p-12 text-center text-slate-400 h-96 flex flex-col items-center justify-center">
-                  <div className="text-6xl mb-4">👈</div>
-                  <p className="text-lg">Seleziona un modulo dalla lista</p>
-                  <p className="text-sm">per visualizzare descrizione, obiettivi e argomenti</p>
+                <div className="bg-slate-100 rounded-2xl p-8 sm:p-12 text-center text-slate-400 min-h-64 sm:h-96 flex flex-col items-center justify-center">
+                  <div className="text-4xl sm:text-6xl mb-4">👆</div>
+                  <p className="text-base sm:text-lg">Seleziona un modulo dalla lista</p>
+                  <p className="text-xs sm:text-sm">per visualizzare descrizione, obiettivi e argomenti</p>
                 </div>
               )}
             </div>
@@ -961,24 +969,24 @@ export default function MasterDashboard() {
 
         {/* ==================== TAB: BENCHMARK ==================== */}
         {activeTab === 'benchmark' && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <section>
-              <h2 className="text-xl font-bold text-slate-800 mb-2">🎓 Master Internazionali di Riferimento</h2>
-              <p className="text-slate-500 mb-6">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-2">🎓 Master Internazionali di Riferimento</h2>
+              <p className="text-slate-500 text-sm sm:text-base mb-4 sm:mb-6">
                 La struttura del programma è stata definita analizzando questi {masterData.benchmarkMasters.length} Master europei
                 nel settore AgriTech, Digital Agriculture e Data Science applicata.
               </p>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {masterData.benchmarkMasters.map(master => (
-                  <div key={master.id} className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all">
-                    <div className="flex items-start gap-4">
-                      <span className="text-3xl">{master.flag}</span>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-slate-800">{master.name}</h3>
-                        <p className="text-sm text-slate-500">{master.institution}</p>
-                        <p className="text-sm text-teal-600 mt-2">{master.focus}</p>
-                        <div className="flex items-center gap-3 mt-3 text-xs text-slate-400">
+                  <div key={master.id} className="bg-white rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <span className="text-2xl sm:text-3xl">{master.flag}</span>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-slate-800 text-sm sm:text-base">{master.name}</h3>
+                        <p className="text-xs sm:text-sm text-slate-500">{master.institution}</p>
+                        <p className="text-xs sm:text-sm text-teal-600 mt-2">{master.focus}</p>
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 sm:mt-3 text-xs text-slate-400">
                           {master.cfu && <span>{master.cfu} CFU/ECTS</span>}
                           <span className="bg-slate-100 px-2 py-0.5 rounded">{master.language}</span>
                           <span>{master.country}</span>
@@ -991,12 +999,12 @@ export default function MasterDashboard() {
             </section>
 
             {/* Differenziazione */}
-            <section className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-2xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-4">🎯 Il Nostro Posizionamento</h3>
-              <div className="grid grid-cols-2 gap-6">
+            <section className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-2xl p-5 sm:p-8 text-white">
+              <h3 className="text-lg sm:text-xl font-bold mb-4">🎯 Il Nostro Posizionamento</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <h4 className="font-semibold mb-2">✅ Per chi è pensato</h4>
-                  <ul className="space-y-1 text-teal-100 text-sm">
+                  <h4 className="font-semibold mb-2 text-sm sm:text-base">✅ Per chi è pensato</h4>
+                  <ul className="space-y-1 text-teal-100 text-xs sm:text-sm">
                     <li>• Professionisti del settore agroalimentare</li>
                     <li>• Manager di cooperative e consorzi</li>
                     <li>• Consulenti e tecnici agricoli</li>
@@ -1005,8 +1013,8 @@ export default function MasterDashboard() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">❌ Cosa NON è</h4>
-                  <ul className="space-y-1 text-teal-100 text-sm">
+                  <h4 className="font-semibold mb-2 text-sm sm:text-base">❌ Cosa NON è</h4>
+                  <ul className="space-y-1 text-teal-100 text-xs sm:text-sm">
                     <li>• Un corso di programmazione o sviluppo software</li>
                     <li>• Un master in agronomia o zootecnia</li>
                     <li>• Un percorso di food engineering tradizionale</li>
@@ -1021,13 +1029,13 @@ export default function MasterDashboard() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-slate-800 text-white py-6 mt-12">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-          <div>
-            <div className="font-bold">Master Digital Technologies per l'Agri-Food</div>
-            <div className="text-slate-400 text-sm">Proposta di Partnership · 2026</div>
+      <footer className="bg-slate-800 text-white py-4 sm:py-6 mt-8 sm:mt-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
+          <div className="text-center sm:text-left">
+            <div className="font-bold text-sm sm:text-base">Master Digital Technologies per l'Agri-Food</div>
+            <div className="text-slate-400 text-xs sm:text-sm">Proposta di Partnership · 2026</div>
           </div>
-          <div className="text-right text-sm text-slate-400">
+          <div className="text-center sm:text-right text-xs sm:text-sm text-slate-400">
             <div>{masterData.totalCFU} CFU · {masterData.modules.length} Moduli · {masterData.duration}</div>
           </div>
         </div>
