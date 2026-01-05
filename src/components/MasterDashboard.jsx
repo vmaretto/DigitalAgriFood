@@ -631,22 +631,24 @@ export default function MasterDashboard() {
         <div className="max-w-6xl mx-auto px-2 sm:px-6">
           <div className="flex">
             {[
-              { id: 'overview', label: '📌', labelFull: '📌 Overview', desc: 'Vista alto livello' },
-              { id: 'modules', label: '📚', labelFull: '📚 Moduli', desc: 'Per categoria' },
-              { id: 'detail', label: '🔍', labelFull: '🔍 Dettaglio', desc: 'Singolo modulo' },
-              { id: 'benchmark', label: '🎓', labelFull: '🎓 Benchmark', desc: 'Master di riferimento' }
+              { id: 'overview', label: 'Overview', icon: '📌', desc: 'Vista alto livello' },
+              { id: 'modules', label: 'Moduli', icon: '📚', desc: 'Per categoria' },
+              { id: 'detail', label: 'Dettaglio', icon: '🔍', desc: 'Singolo modulo' },
+              { id: 'benchmark', label: 'Benchmark', icon: '🎓', desc: 'Master di riferimento' }
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id); if(tab.id !== 'detail') setSelectedModule(null); }}
-                className={`px-3 sm:px-5 py-3 sm:py-4 text-sm font-medium border-b-2 transition-all flex-1 sm:flex-none ${
+                className={`px-2 sm:px-5 py-2 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition-all flex-1 sm:flex-none ${
                   activeTab === tab.id
                     ? 'border-teal-600 text-teal-700 bg-teal-50'
                     : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <div className="sm:hidden text-lg">{tab.label}</div>
-                <div className="hidden sm:block">{tab.labelFull}</div>
+                <div className="flex flex-col sm:flex-row items-center sm:gap-1">
+                  <span className="text-base sm:text-sm">{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </div>
                 <div className="text-xs font-normal text-slate-400 hidden sm:block">{tab.desc}</div>
               </button>
             ))}
